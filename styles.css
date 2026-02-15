@@ -189,7 +189,7 @@ video {
   }
 }
 
-/* NAVIGATION — make the bar thicker and stretch up */
+
 .nav {
   position: fixed;
   top: 0;
@@ -212,7 +212,7 @@ video {
   transition: all var(--transition);
 }
 
-/* keep the safe-area extension so the color reaches into the top area */
+
 .nav::before {
   content: "";
   position: fixed;
@@ -225,7 +225,6 @@ video {
   pointer-events: none;
 }
 
-/* mobile adjustments (keeps the thicker look on small screens) */
 @media (max-width: 768px) {
   .nav {
     padding: 18px 20px;
@@ -1298,6 +1297,7 @@ video {
   transform: translateY(0);
   opacity: 1;
 }
+
 
 
 
