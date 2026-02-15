@@ -62,13 +62,6 @@ document.getElementById('hamburger').addEventListener('click', () => {
   document.getElementById('mobileMenu').classList.toggle('open');
 });
 
-const mql = window.matchMedia('(max-width: 768px)');
-function handleMobileToggle(e) {
-  document.getElementById('themeToggleMobile').style.display = e.matches ? 'block' : 'none';
-}
-mql.addEventListener('change', handleMobileToggle);
-handleMobileToggle(mql);
-
 // ============================================
 // THEME TOGGLE
 // ============================================
