@@ -30,7 +30,7 @@
   --shadow-card: 0 2px 20px rgba(0, 0, 0, 0.3);
   --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.5);
   --grain-opacity: 0.035;
-  --nav-bg: rgba(14, 14, 16, 0.85);
+  --nav-bg: rgba(14, 14, 16, 0.95);
   --tag-bg: rgba(200, 168, 124, 0.1);
   --tag-text: #C8A87C;
   --scrollbar-track: #161618;
@@ -55,7 +55,7 @@
   --shadow-card: 0 2px 20px rgba(0, 0, 0, 0.06);
   --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.1);
   --grain-opacity: 0.02;
-  --nav-bg: rgba(245, 242, 237, 0.85);
+  --nav-bg: rgba(245, 242, 237, 0.95);
   --tag-bg: rgba(139, 109, 71, 0.08);
   --tag-text: #8B6D47;
   --scrollbar-track: #EBE8E2;
@@ -192,13 +192,17 @@ video {
 /* ============================================
    NAVIGATION
    ============================================ */
+/* reduced vertical padding so nav sits closer to URL bar on mobile */
 .nav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 16px 40px;
+  padding: 12px 40px;
+  padding-top: max(12px, env(safe-area-inset-top));
+  padding-left: max(40px, env(safe-area-inset-left));
+  padding-right: max(40px, env(safe-area-inset-right));
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -207,6 +211,19 @@ video {
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--border);
   transition: all var(--transition);
+}
+
+/* extend the nav background into the top safe area (iOS Safari) */
+.nav::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top);
+  background: var(--nav-bg);
+  z-index: 999;
+  pointer-events: none;
 }
 
 .nav-logo {
@@ -398,8 +415,8 @@ video {
 
 @media (max-width: 768px) {
   .nav {
-    padding: 16px 20px;
-    padding-top: max(16px, env(safe-area-inset-top));
+    padding: 12px 20px;
+    padding-top: max(12px, env(safe-area-inset-top));
     padding-left: max(20px, env(safe-area-inset-left));
     padding-right: max(20px, env(safe-area-inset-right));
   }
@@ -1350,4 +1367,5 @@ video {
   transform: translateY(0);
   opacity: 1;
 }
+
 
