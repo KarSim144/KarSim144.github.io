@@ -189,13 +189,14 @@ video {
   }
 }
 
-/* NAVIGATION */
+/* NAVIGATION (replace existing .nav rules with this block) */
 .nav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  /* raise above the body::after grain (which is z-index: 9999) */
+  z-index: 10001;
   padding: 12px 40px;
   padding-top: max(12px, env(safe-area-inset-top));
   padding-left: max(40px, env(safe-area-inset-left));
@@ -203,6 +204,7 @@ video {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* use a mostly-opaque nav background so the extension looks seamless */
   background: var(--nav-bg);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -210,7 +212,20 @@ video {
   transition: all var(--transition);
 }
 
-
+/* extend the nav background into the top safe area (iOS Safari)
+   place this at top-level (not inside @media) so it always applies */
+.nav::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* env(safe-area-inset-top) + a few px to reliably cover the URL bar */
+  height: calc(env(safe-area-inset-top) + 12px);
+  background: var(--nav-bg);
+  z-index: 10000; /* behind nav content (10001) but above the page background */
+  pointer-events: none;
+}
 
 /* mobile adjustments */
 @media (max-width: 768px) {
@@ -1285,6 +1300,7 @@ video {
   transform: translateY(0);
   opacity: 1;
 }
+
 
 
 
