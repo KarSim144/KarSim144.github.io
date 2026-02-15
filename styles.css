@@ -210,18 +210,7 @@ video {
   transition: all var(--transition);
 }
 
-/* extend the nav background into the top safe area (iOS Safari) */
-.nav::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: env(safe-area-inset-top);
-  background: var(--nav-bg);
-  z-index: 999; /* sits behind the nav content (nav z-index:1000) but above page bg */
-  pointer-events: none;
-}
+
 
 /* mobile adjustments */
 @media (max-width: 768px) {
@@ -1295,6 +1284,7 @@ video {
   transform: translateY(0);
   opacity: 1;
 }
+
 
 
 
