@@ -189,10 +189,7 @@ video {
   }
 }
 
-/* ============================================
-   NAVIGATION
-   ============================================ */
-/* reduced vertical padding so nav sits closer to URL bar on mobile */
+/* NAVIGATION */
 .nav {
   position: fixed;
   top: 0;
@@ -222,92 +219,23 @@ video {
   right: 0;
   height: env(safe-area-inset-top);
   background: var(--nav-bg);
-  z-index: 999;
+  z-index: 999; /* sits behind the nav content (nav z-index:1000) but above page bg */
   pointer-events: none;
 }
 
-.nav-logo {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
-  transition: color var(--transition);
-}
+/* mobile adjustments */
+@media (max-width: 768px) {
+  .nav {
+    padding: 12px 20px;
+    padding-top: max(12px, env(safe-area-inset-top));
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
 
-.nav-logo span {
-  color: var(--accent);
-  font-style: italic;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 36px;
-  list-style: none;
-}
-
-.nav-links a {
-  font-size: 0.85rem;
-  font-weight: 400;
-  color: var(--text-secondary);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  transition: color var(--transition-fast);
-  position: relative;
-}
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--accent);
-  transition: width var(--transition);
-}
-
-.nav-links a:hover {
-  color: var(--text-primary);
-}
-
-.nav-links a:hover::after {
-  width: 100%;
-}
-
-.nav-links a.active {
-  color: var(--accent);
-}
-
-.nav-links a.active::after {
-  width: 100%;
-}
-
-.theme-toggle {
-  width: 44px;
-  height: 24px;
-  background: var(--bg-tertiary);
-  border-radius: 12px;
-  position: relative;
-  border: 1px solid var(--border);
-  transition: background var(--transition);
-  flex-shrink: 0;
-}
-
-.theme-toggle::after {
-  content: '';
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--accent);
-  top: 2px;
-  left: 2px;
-  transition: transform var(--transition);
-}
-
-[data-theme="light"] .theme-toggle::after {
-  transform: translateX(20px);
+  .nav-logo { font-size: 1.3rem; }
+  .nav-links { display: none; }
+  .nav-mobile-controls { display: flex; }
+  .nav-hamburger { display: flex; }
 }
 
 /* Mobile controls container */
@@ -1367,5 +1295,6 @@ video {
   transform: translateY(0);
   opacity: 1;
 }
+
 
 
