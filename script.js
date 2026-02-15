@@ -240,3 +240,52 @@ function animateCounters() {
 }
 
 animateCounters();
+// ============================================
+// CONTACT FORM HANDLING
+// ============================================
+const contactForm = document.getElementById('contactForm');
+let cooldownActive = false;
+let cooldownTime = 60;
+
+contactForm.addEventListener('submit', function(e) {
+  const submitBtn = contactForm.querySelector('button[type="submit"]');
+  
+  // Block if cooldown is active
+  if (cooldownActive) {
+    e.preventDefault();
+    showToast(`Please wait ${cooldownTime} seconds before sending again`);
+    return;
+  }
+  
+  // Prevent double-clicks
+  if (submitBtn.disabled) {
+    e.preventDefault();
+    return;
+  }
+  
+  // Disable button and show loading state
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = 'Sending...';
+  
+  // Let form submit, then handle reset and cooldown
+  setTimeout(() => {
+    contactForm.reset();
+    showToast('Message sent successfully!');
+    
+    // Start cooldown
+    cooldownActive = true;
+    cooldownTime = 60;
+    
+    const cooldownInterval = setInterval(() => {
+      cooldownTime--;
+      submitBtn.innerHTML = `Wait ${cooldownTime}s`;
+      
+      if (cooldownTime <= 0) {
+        clearInterval(cooldownInterval);
+        cooldownActive = false;
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `Send Message <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+      }
+    }, 1000);
+  }, 1000);
+});
