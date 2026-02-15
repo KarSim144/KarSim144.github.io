@@ -392,7 +392,7 @@ video {
   }
 
   #themeToggleMobile {
-    display: block !important;
+    display: block;
   }
 }
 
