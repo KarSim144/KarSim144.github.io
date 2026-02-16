@@ -68,8 +68,16 @@ document.getElementById('hamburger').addEventListener('click', () => {
 function toggleTheme() {
   const html = document.documentElement;
   const current = html.getAttribute('data-theme');
-  html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch (e) {}
 }
+
+// Restore saved theme
+try {
+  const saved = localStorage.getItem('theme');
+  if (saved) document.documentElement.setAttribute('data-theme', saved);
+} catch (e) {}
 
 document.getElementById('themeToggle').addEventListener('click', toggleTheme);
 document.getElementById('themeToggleMobile').addEventListener('click', toggleTheme);
@@ -140,7 +148,7 @@ initScrollReveal();
 // ============================================
 function renderProjectCard(project, idx) {
   const delayClass = idx > 0 ? ` reveal-delay-${idx}` : '';
-  
+
   return `
     <div class="project-card no-hover reveal${delayClass}">
       <div class="project-card-header">
@@ -233,52 +241,67 @@ function animateCounters() {
 }
 
 animateCounters();
+
 // ============================================
-// CONTACT FORM HANDLING
+// CONTACT FORM HANDLING (AJAX)
 // ============================================
 const contactForm = document.getElementById('contactForm');
+const submitBtn = contactForm.querySelector('button[type="submit"]');
+const submitBtnHTML = submitBtn.innerHTML;
 let cooldownActive = false;
 let cooldownTime = 60;
 
-contactForm.addEventListener('submit', function(e) {
-  const submitBtn = contactForm.querySelector('button[type="submit"]');
-  
+contactForm.addEventListener('submit', async function(e) {
+  e.preventDefault(); // Always prevent default — we submit via fetch
+
   // Block if cooldown is active
   if (cooldownActive) {
-    e.preventDefault();
-    showToast(`Please wait ${cooldownTime} seconds before sending again`);
+    showToast(`Please wait ${cooldownTime}s before sending again`);
     return;
   }
-  
+
   // Prevent double-clicks
-  if (submitBtn.disabled) {
-    e.preventDefault();
-    return;
-  }
-  
+  if (submitBtn.disabled) return;
+
   // Disable button and show loading state
   submitBtn.disabled = true;
   submitBtn.innerHTML = 'Sending...';
-  
-  // Let form submit, then handle reset and cooldown
-  setTimeout(() => {
-    contactForm.reset();
-    showToast('Message sent successfully!');
-    
-    // Start cooldown
-    cooldownActive = true;
-    cooldownTime = 60;
-    
-    const cooldownInterval = setInterval(() => {
-      cooldownTime--;
-      submitBtn.innerHTML = `Wait ${cooldownTime}s`;
-      
-      if (cooldownTime <= 0) {
-        clearInterval(cooldownInterval);
-        cooldownActive = false;
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = `Send Message <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
-      }
-    }, 1000);
+
+  try {
+    const formData = new FormData(contactForm);
+
+    const response = await fetch(contactForm.action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      contactForm.reset();
+      showToast('Message sent successfully!');
+    } else {
+      throw new Error('Server error');
+    }
+  } catch (err) {
+    showToast('Failed to send. Please try again.');
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = submitBtnHTML;
+    return;
+  }
+
+  // Start cooldown
+  cooldownActive = true;
+  cooldownTime = 60;
+
+  const cooldownInterval = setInterval(() => {
+    cooldownTime--;
+    submitBtn.innerHTML = `Wait ${cooldownTime}s`;
+
+    if (cooldownTime <= 0) {
+      clearInterval(cooldownInterval);
+      cooldownActive = false;
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = submitBtnHTML;
+    }
   }, 1000);
 });
