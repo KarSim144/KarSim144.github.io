@@ -514,6 +514,7 @@ video {
     left: 24px;
     bottom: 24px;
   }
+   }
 .nav::before {
   content: "";
   position: fixed;
@@ -1297,6 +1298,7 @@ video {
   transform: translateY(0);
   opacity: 1;
 }
+
 
 
 
