@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Showcase | Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .showcase-tab-row {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 32px;
+      justify-content: center;
+    }
+    .showcase-tab-btn {
+      background: var(--accent, #C8A87C);
+      color: var(--bg-primary, #161619);
+      border: none;
+      border-radius: 100px;
+      font-weight: 600;
+      padding: 12px 32px;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: background 0.19s;
+      opacity: 0.7;
+    }
+    .showcase-tab-btn.active {
+      opacity: 1;
+      background: var(--accent-hover, #D4B88E);
+    }
+    .showcase-section {
+      display: none;
+      padding: 36px 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .showcase-section.active {
+      display: block;
+      animation: fadein 0.3s;
+    }
+    @keyframes fadein { from {opacity:0;} to {opacity:1;} }
+    .showcase-video { margin: 30px 0; }
+    .btn-back {
+      margin-top: 32px;
+      display: inline-block;
+      background: none;
+      border: 1px solid var(--border-hover, #D4B88E);
+      padding: 13px 24px;
+      border-radius: 100px;
+      font-weight: 600;
+      color: var(--accent, #C8A87C);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-back:hover {
+      color: var(--accent-hover, #D4B88E);
+      border-color: var(--accent-hover, #D4B88E);
+    }
+  </style>
+</head>
+<body>
+  <div class="page" style="padding-top:140px;">
+    <section class="section">
+      <div class="section-header reveal">
+        <span class="section-label">Video Showcase</span>
+        <h2 class="section-title">See my security projects & demos</h2>
+      </div>
+      <div class="showcase-tab-row">
+        <button class="showcase-tab-btn active" data-showcase="privilege">Privilege Escalation Demo</button>
+        <button class="showcase-tab-btn" data-showcase="payload">Custom Payload Builder</button>
+        <button class="showcase-tab-btn" data-showcase="network">Network Traffic Analyzer</button>
+      </div>
+      <div class="showcase-section active" id="showcase-privilege">
+        <h3>Privilege Escalation Demo</h3>
+        <p>
+          This section explains privilege escalation in cybersecurity. Below is a demonstration showing how attackers escalate privileges within a system.
+        </p>
+        <div class="showcase-video">
+          <!-- Replace this with your own video embed -->
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID1" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="showcase-section" id="showcase-payload">
+        <h3>Custom Payload Builder</h3>
+        <p>
+          This section demonstrates how to create and use custom payloads for penetration testing engagements. See the video below for step-by-step payload construction and deployment.
+        </p>
+        <div class="showcase-video">
+          <!-- Replace this with your own video embed -->
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID2" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="showcase-section" id="showcase-network">
+        <h3>Network Traffic Analyzer</h3>
+        <p>
+          In this section, you'll see how to analyze and visualize network traffic to detect anomalies and threats. Watch the video for a hands-on demo on packet analysis.
+        </p>
+        <div class="showcase-video">
+          <!-- Replace this with your own video embed -->
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID3" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+      <a href="index.html" class="btn-back">&#8592; Back to portfolio</a>
+    </section>
+  </div>
+  <script>
+    // Tab switching logic
+    const tabButtons = document.querySelectorAll('.showcase-tab-btn');
+    const sections = {
+      privilege: document.getElementById('showcase-privilege'),
+      payload: document.getElementById('showcase-payload'),
+      network: document.getElementById('showcase-network')
+    };
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active from all buttons and sections
+        tabButtons.forEach(b => b.classList.remove('active'));
+        Object.values(sections).forEach(sec => sec.classList.remove('active'));
+        // Add active to clicked button and relevant section
+        btn.classList.add('active');
+        sections[btn.dataset.showcase].classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
