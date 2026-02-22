@@ -40,6 +40,41 @@
     <a href="#" data-page="contact">Contact</a>
   </div>
 
+  <!-- ========== SHOWCASE MODAL ========== -->
+  <div class="showcase-modal-backdrop" id="showcaseModal">
+    <div class="showcase-modal">
+      <button class="modal-close-btn" onclick="closeShowcaseModal()" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <!-- Video -->
+      <div class="modal-video-wrapper">
+        <video id="modalVideo" controls playsinline style="display:none;">
+          <source id="modalVideoSrc" src="" type="video/mp4">
+        </video>
+        <div class="modal-video-placeholder" id="modalVideoPlaceholder">
+          <div class="placeholder-icon">
+            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+          <p>Video coming soon</p>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="modal-body">
+        <div class="modal-meta">
+          <span class="modal-label-tag" id="modalLabel"></span>
+          <span class="modal-status-tag">// Demo</span>
+        </div>
+        <h2 id="modalTitle"></h2>
+        <div class="modal-divider"></div>
+        <div class="modal-description" id="modalDescription"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ========== HOME PAGE ========== -->
   <div class="page active" id="page-home">
     <section class="hero">
@@ -111,7 +146,7 @@
           I like cybersecurity projects so here are some videos showcasing my work. Simple really but cool nonetheless.
         </p>
         <div class="showcase-grid">
-          <div class="showcase-item reveal reveal-delay-1">
+          <div class="showcase-item reveal reveal-delay-1" data-showcase="privesc">
             <div class="showcase-thumb" style="background:linear-gradient(180deg,#1a1a2e 0%,#0a0a1a 100%);"></div>
             <div class="showcase-overlay">
               <div class="showcase-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
@@ -119,7 +154,7 @@
               <span>Security Research (SOON!)</span>
             </div>
           </div>
-          <div class="showcase-item reveal reveal-delay-2">
+          <div class="showcase-item reveal reveal-delay-2" data-showcase="payload">
             <div class="showcase-thumb" style="background:linear-gradient(180deg,#2e1a1a 0%,#1a0a0a 100%);"></div>
             <div class="showcase-overlay">
               <div class="showcase-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
@@ -127,7 +162,7 @@
               <span>Offensive Security (SOON!)</span>
             </div>
           </div>
-          <div class="showcase-item reveal reveal-delay-3">
+          <div class="showcase-item reveal reveal-delay-3" data-showcase="network">
             <div class="showcase-thumb" style="background:linear-gradient(180deg,#1a2e1a 0%,#0a1a0a 100%);"></div>
             <div class="showcase-overlay">
               <div class="showcase-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
@@ -163,7 +198,7 @@
           I like cybersecurity projects so here are some videos showcasing my work. Simple really but cool nonetheless.
         </p>
         <div class="showcase-grid">
-          <div class="showcase-item reveal reveal-delay-1">
+          <div class="showcase-item reveal reveal-delay-1" data-showcase="privesc">
             <div class="showcase-thumb" style="background:linear-gradient(180deg,#1a1a2e 0%,#0a0a1a 100%);"></div>
             <div class="showcase-overlay">
               <div class="showcase-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
@@ -171,7 +206,7 @@
               <span>Security Research (SOON!)</span>
             </div>
           </div>
-          <div class="showcase-item reveal reveal-delay-2">
+          <div class="showcase-item reveal reveal-delay-2" data-showcase="payload">
             <div class="showcase-thumb" style="background:linear-gradient(180deg,#2e1a1a 0%,#1a0a0a 100%);"></div>
             <div class="showcase-overlay">
               <div class="showcase-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
@@ -179,7 +214,7 @@
               <span>Offensive Security (SOON!)</span>
             </div>
           </div>
-          <div class="showcase-item reveal reveal-delay-3">
+          <div class="showcase-item reveal reveal-delay-3" data-showcase="network">
             <div class="showcase-thumb" style="background:linear-gradient(180deg,#1a2e1a 0%,#0a1a0a 100%);"></div>
             <div class="showcase-overlay">
               <div class="showcase-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
@@ -307,10 +342,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
