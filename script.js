@@ -24,6 +24,63 @@ const projects = [
 ];
 
 // ============================================
+// SHOWCASE DATA
+// ============================================
+const showcaseData = {
+  'privesc': {
+    title: 'Privilege Escalation Demo',
+    label: 'Security Research',
+    videoSrc: '', // Add your video URL here
+    description: `
+      <p>This demo walks through a classic Linux privilege escalation scenario from an unprivileged shell to root access, using a misconfigured SUID binary.</p>
+      <p>The attack chain begins by identifying the vulnerable binary with <code>find / -perm -4000 2>/dev/null</code>, then exploiting weak file permissions to overwrite a root-owned script that runs on a cron job.</p>
+      <h4>Techniques Covered</h4>
+      <ul>
+        <li>SUID binary enumeration</li>
+        <li>Cron job abuse</li>
+        <li>Writable PATH exploitation</li>
+        <li>Post-exploitation cleanup</li>
+      </ul>
+      <p>All testing was performed in an isolated lab environment. This demo is intended purely for educational purposes — understanding how privilege escalation works is essential for hardening real systems against it.</p>
+    `
+  },
+  'payload': {
+    title: 'Custom Payload Builder',
+    label: 'Offensive Security',
+    videoSrc: '',
+    description: `
+      <p>A walkthrough of a custom payload generation tool built to automate common offensive security tasks during CTF competitions and authorized penetration tests.</p>
+      <p>The tool supports multiple payload types including reverse shells, staged loaders, and encoded shellcode — with automatic obfuscation to bypass basic signature detection.</p>
+      <h4>Features Demonstrated</h4>
+      <ul>
+        <li>Reverse shell generation (Python, Bash, PowerShell)</li>
+        <li>Base64 / XOR encoding layers</li>
+        <li>Listener integration via netcat / pwncat</li>
+        <li>AMSI bypass techniques</li>
+      </ul>
+      <p>Built for educational use and authorized engagements only. Understanding payload construction is fundamental to defensive security work and red team assessments.</p>
+    `
+  },
+  'network': {
+    title: 'Network Traffic Analyzer',
+    label: 'Blue Team Tools',
+    videoSrc: '',
+    description: `
+      <p>A real-time network traffic analysis tool designed for blue teamers to quickly identify anomalous patterns, suspicious connections, and potential data exfiltration attempts.</p>
+      <p>The analyzer parses PCAP files and live captures, flagging traffic that matches known C2 patterns, unusual port usage, or large outbound data transfers outside of business hours.</p>
+      <h4>Capabilities Shown</h4>
+      <ul>
+        <li>PCAP parsing and protocol dissection</li>
+        <li>Anomaly scoring and alerting</li>
+        <li>DNS tunneling detection</li>
+        <li>Visual traffic timeline with filtering</li>
+      </ul>
+      <p>This tool was developed as part of ongoing blue team research. It is designed to complement existing SIEM solutions and provide lightweight, portable traffic analysis capabilities.</p>
+    `
+  }
+};
+
+// ============================================
 // SVG ICON TEMPLATES
 // ============================================
 const icons = {
@@ -252,18 +309,15 @@ let cooldownActive = false;
 let cooldownTime = 60;
 
 contactForm.addEventListener('submit', async function(e) {
-  e.preventDefault(); // Always prevent default — we submit via fetch
+  e.preventDefault();
 
-  // Block if cooldown is active
   if (cooldownActive) {
     showToast(`Please wait ${cooldownTime}s before sending again`);
     return;
   }
 
-  // Prevent double-clicks
   if (submitBtn.disabled) return;
 
-  // Disable button and show loading state
   submitBtn.disabled = true;
   submitBtn.innerHTML = 'Sending...';
 
@@ -289,7 +343,6 @@ contactForm.addEventListener('submit', async function(e) {
     return;
   }
 
-  // Start cooldown
   cooldownActive = true;
   cooldownTime = 60;
 
@@ -304,6 +357,69 @@ contactForm.addEventListener('submit', async function(e) {
       submitBtn.innerHTML = submitBtnHTML;
     }
   }, 1000);
-  
 });
 
+// ============================================
+// SHOWCASE MODAL
+// ============================================
+function openShowcaseModal(key) {
+  const data = showcaseData[key];
+  if (!data) return;
+
+  const modal = document.getElementById('showcaseModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalLabel = document.getElementById('modalLabel');
+  const modalVideo = document.getElementById('modalVideo');
+  const modalVideoSrc = document.getElementById('modalVideoSrc');
+  const modalPlaceholder = document.getElementById('modalVideoPlaceholder');
+  const modalDescription = document.getElementById('modalDescription');
+
+  modalTitle.textContent = data.title;
+  modalLabel.textContent = data.label;
+  modalDescription.innerHTML = data.description;
+
+  if (data.videoSrc) {
+    modalVideoSrc.src = data.videoSrc;
+    modalVideo.load();
+    modalVideo.style.display = 'block';
+    modalPlaceholder.style.display = 'none';
+  } else {
+    modalVideo.style.display = 'none';
+    modalPlaceholder.style.display = 'flex';
+    modalVideoSrc.src = '';
+  }
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeShowcaseModal() {
+  const modal = document.getElementById('showcaseModal');
+  const modalVideo = document.getElementById('modalVideo');
+
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+
+  // Pause video when closing
+  modalVideo.pause();
+}
+
+// Wire up showcase items via data-showcase attribute
+document.addEventListener('click', e => {
+  const item = e.target.closest('.showcase-item[data-showcase]');
+  if (item) {
+    openShowcaseModal(item.dataset.showcase);
+  }
+});
+
+// Close on backdrop click
+document.getElementById('showcaseModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('showcaseModal')) {
+    closeShowcaseModal();
+  }
+});
+
+// Close on escape key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeShowcaseModal();
+});
