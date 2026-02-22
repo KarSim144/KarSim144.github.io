@@ -304,4 +304,6 @@ contactForm.addEventListener('submit', async function(e) {
       submitBtn.innerHTML = submitBtnHTML;
     }
   }, 1000);
+  
 });
+
