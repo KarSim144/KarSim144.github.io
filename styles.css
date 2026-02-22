@@ -1368,41 +1368,4 @@ video {
   transform: translateY(0);
   opacity: 1;
 }
-.demo-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(20,20,20,0.98);
-  z-index: 1000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  animation: fadeInOverlay 0.4s ease;
-}
 
-.demo-content {
-  max-width: 900px;
-  width: 90%;
-  background: var(--bg-secondary, #222);
-  padding: 56px 42px;
-  border-radius: 22px;
-  box-shadow: 0 8px 32px #0008;
-  position: relative;
-  color: var(--text-primary, #fff);
-}
-
-.demo-close {
-  position: absolute;
-  top: 18px;
-  right: 26px;
-  font-size: 2.2rem;
-  font-weight: bold;
-  background: none;
-  color: var(--accent, #f57c00);
-  border: none;
-  cursor: pointer;
-}
-
-@keyframes fadeInOverlay {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
