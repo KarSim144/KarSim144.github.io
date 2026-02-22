@@ -142,7 +142,38 @@ function initScrollReveal() {
 }
 
 initScrollReveal();
+// Video Showcase card popups
+const showcaseMap = {
+  privilege: 'page-privilege',
+  payload: 'page-payload',
+  network: 'page-network'
+};
 
+// Hide all .page's except home
+function showMainPage() {
+  document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+  document.getElementById('page-home').classList.add('active');
+}
+
+// Open a given page by ID
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+}
+
+// Add event listeners for Video Showcase cards
+document.querySelectorAll('.showcase-item[data-showcase]').forEach(item => {
+  item.addEventListener('click', () => {
+    const key = item.getAttribute('data-showcase');
+    const pageId = showcaseMap[key];
+    showPage(pageId);
+  });
+});
+
+// Back buttons for Video Showcase pages
+document.getElementById('backPrivilege').addEventListener('click', showMainPage);
+document.getElementById('backPayload').addEventListener('click', showMainPage);
+document.getElementById('backNetwork').addEventListener('click', showMainPage);
 // ============================================
 // RENDER PROJECT CARDS
 // ============================================
@@ -305,3 +336,4 @@ contactForm.addEventListener('submit', async function(e) {
     }
   }, 1000);
 });
+
