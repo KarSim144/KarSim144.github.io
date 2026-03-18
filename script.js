@@ -18,7 +18,8 @@ const projects = [
     tags: ['PHP', 'JS', 'Web'],
     clientList: [
       { name: 'Example Client Work', url: 'https://ulakantik.com' },
-      { name: 'This Website!', url: '' }
+      { name: 'This Website', url: '' },
+      { name: 'Card Game (Demo)' , url: 'https://karsim144.github.io/cardgame/'}
     ]
   }
 ];
