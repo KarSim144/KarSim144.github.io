@@ -1,15 +1,13 @@
-// ============================================
-// EDITABLE SITE DATA
-// Add or remove project links, video links, and experience items here.
-// ============================================
 const projects = [
   {
     id: 'github',
     title: 'GitHub Projects',
     description: 'Open source work, experiments, libraries, and tools I am building or learning from.',
+    profileLink: { name: 'View Profile', url: 'https://github.com/KarSim144' },
     tags: ['Java', 'JavaScript', 'Python', 'PHP', 'Docker'],
-    links: [
-      { name: 'View Profile', url: 'https://github.com/KarSim144' }
+    notableProjects: [
+      { name: 'Project Name 1', url: 'https://github.com/KarSim144/project-name-1' },
+      { name: 'Project Name 2', url: 'https://github.com/KarSim144/project-name-2' }
     ]
   },
   {
@@ -170,7 +168,7 @@ function animateRing() {
 }
 animateRing();
 
-const interactiveSelector = 'a, button, .project-card, .project-link, .showcase-item, .skill-tag, .experience-item, .contact-link-item';
+const interactiveSelector = 'a, button, .project-card, .project-link, .project-inline-link, .showcase-item, .skill-tag, .experience-item, .contact-link-item';
 
 document.addEventListener('mouseover', e => {
   if (e.target.closest(interactiveSelector)) {
@@ -269,6 +267,16 @@ function renderProjectLink(link) {
 function renderProjectCard(project, idx) {
   const delayClass = idx > 0 ? ` reveal-delay-${idx}` : '';
   const links = project.links || [];
+  const notableProjects = project.notableProjects || [];
+
+  const profileLinkMarkup = project.profileLink
+    ? `
+      <br>
+      <a href="${escapeAttribute(project.profileLink.url)}" target="_blank" rel="noopener noreferrer" class="project-inline-link">
+        ${escapeHTML(project.profileLink.name)}
+      </a>
+    `
+    : '';
 
   return `
     <div class="project-card no-hover reveal${delayClass}">
@@ -276,11 +284,38 @@ function renderProjectCard(project, idx) {
         <div class="project-icon">${icons.book}</div>
         <h3>${escapeHTML(project.title)}</h3>
       </div>
-      <p>${escapeHTML(project.description)}</p>
-      <div class="project-tags">${project.tags.map(t => `<span class="project-tag">${escapeHTML(t)}</span>`).join('')}</div>
-      <div class="project-links">
-        ${links.map(renderProjectLink).join('')}
+
+      <p>
+        ${escapeHTML(project.description)}
+        ${profileLinkMarkup}
+      </p>
+
+      <div class="project-tags">
+        ${project.tags.map(t => `<span class="project-tag">${escapeHTML(t)}</span>`).join('')}
       </div>
+
+      ${
+        notableProjects.length
+          ? `
+            <div class="project-links-block">
+              <h4>Notable Projects</h4>
+              <div class="project-links">
+                ${notableProjects.map(renderProjectLink).join('')}
+              </div>
+            </div>
+          `
+          : ''
+      }
+
+      ${
+        links.length
+          ? `
+            <div class="project-links">
+              ${links.map(renderProjectLink).join('')}
+            </div>
+          `
+          : ''
+      }
     </div>
   `;
 }
