@@ -1,3 +1,4 @@
+//EDITABLE PARTS (SIMPLIFIED)
 const projects = [
   {
     id: 'github',
@@ -6,8 +7,8 @@ const projects = [
     profileLink: { name: 'View Profile', url: 'https://github.com/KarSim144' },
     tags: ['Java', 'JavaScript', 'Python', 'PHP', 'Docker'],
     notableProjects: [
-      { name: 'Project Name 1', url: 'https://github.com/KarSim144/project-name-1' },
-      { name: 'Project Name 2', url: 'https://github.com/KarSim144/project-name-2' }
+      { name: 'Session Stealer Example', url: 'https://github.com/KarSim144/discord-token-stealer-example' },
+      { name: 'SOON', url: '' }
     ]
   },
   {
