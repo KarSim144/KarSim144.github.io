@@ -1764,3 +1764,16 @@ video {
   transform: translateY(0);
   opacity: 1;
 }
+.project-inline-link {
+  display: inline-flex;
+  margin-top: 0.45rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #38bdf8;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.project-inline-link:hover {
+  color: #7dd3fc;
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.55);
+}
