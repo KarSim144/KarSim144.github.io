@@ -1,26 +1,65 @@
 // ============================================
-// DATA
+// EDITABLE SITE DATA
+// Add or remove project links, video links, and experience items here.
 // ============================================
 const projects = [
   {
     id: 'github',
     title: 'GitHub Projects',
-    description: 'Browse my open source work, libraries, and tools.',
-    tags: ['Java', 'JavaScript', 'Python', 'PHP'],
-    clientList: [
+    description: 'Open source work, experiments, libraries, and tools I am building or learning from.',
+    tags: ['Java', 'JavaScript', 'Python', 'PHP', 'Docker'],
+    links: [
       { name: 'View Profile', url: 'https://github.com/KarSim144' }
     ]
   },
   {
-    id: 'clients',
-    title: 'Client Works',
-    description: 'Websites and apps built for real clients.',
-    tags: ['PHP', 'JS', 'Web'],
-    clientList: [
-      { name: 'Example Client Work', url: 'https://ulakantik.com' },
-      { name: 'This Website', url: '' },
-      { name: 'Card Game (Demo)' , url: 'https://karsim144.github.io/cardgame/'}
+    id: 'live-projects',
+    title: 'Live Projects',
+    description: 'Websites, demos, and apps that are online and ready to explore.',
+    tags: ['PHP', 'JS', 'Web', 'Unity', 'C#'],
+    links: [
+      { name: 'Client Website Example', url: 'https://ulakantik.com' },
+      { name: 'Cyberdasher Game Showcase', url: 'https://youtu.be/VckNAJzVQxw?si=UjBd60rHWM0zc_Lx' },
+      { name: 'Deadgear Game Showcase', url: 'https://youtu.be/vPnLGpkPyns?si=5jU81Pxs1tlleHIi' },
+      { name: 'Web Card Game Demo', url: 'https://karsim144.github.io/cardgame/' }
     ]
+  }
+];
+
+const videos = [
+  {
+    title: 'Simple Keylogger Demo',
+    label: 'Security Research',
+    url: 'https://www.youtube.com/watch?v=fJBjQYk43Jk'
+  },
+  {
+    title: 'Modern Account Stealer',
+    label: 'Offensive Security',
+    url: 'https://www.youtube.com/watch?v=SR6Sc4e2WHI'
+  },
+  {
+    title: 'Remote File Controller',
+    label: 'Proof Of Concept',
+    url: 'https://youtu.be/-5709M4Oho8?si=HtS6-n7qkr7_kML8'
+  }
+];
+
+const experienceItems = [
+  {
+    title: 'Internship at Unirobotics',
+    detail: 'Unirobotics is a arms manufacturing company which im doing my internship at currently as a developer.'
+  },
+  {
+    title: 'Live Web Projects',
+    detail: 'I have also made websites for several clients different to their needs.'
+  },
+  {
+    title: 'Game Development',
+    detail: 'Created game demos with as a 2 people team. Im planning on making new/more complete games in the future when time allows.'
+  },
+  {
+    title: 'Always Learning',
+    detail: 'The sky is the limit! (maybe not? hopefully)'
   }
 ];
 
@@ -66,18 +105,43 @@ document.getElementById('hamburger').addEventListener('click', () => {
 // ============================================
 // THEME TOGGLE
 // ============================================
-function toggleTheme() {
+const styleModes = [
+  { theme: 'dark', label: 'Night', cursor: 'ring' },
+  { theme: 'light', label: 'Paper', cursor: 'soft' },
+  { theme: 'terminal', label: 'Terminal', cursor: 'square' },
+  { theme: 'sunset', label: 'Dusk', cursor: 'spotlight' }
+];
+
+function applyStyleMode(themeName) {
   const html = document.documentElement;
-  const current = html.getAttribute('data-theme');
-  const next = current === 'dark' ? 'light' : 'dark';
-  html.setAttribute('data-theme', next);
-  try { localStorage.setItem('theme', next); } catch (e) {}
+  const mode = styleModes.find(item => item.theme === themeName) || styleModes[0];
+
+  html.setAttribute('data-theme', mode.theme);
+  html.setAttribute('data-cursor', mode.cursor);
+
+  document.querySelectorAll('.theme-toggle').forEach(btn => {
+    btn.dataset.mode = mode.theme;
+    btn.setAttribute('aria-label', `Style: ${mode.label}. Click to change style.`);
+    btn.setAttribute('title', `Style: ${mode.label}`);
+  });
+
+  try {
+    localStorage.setItem('theme', mode.theme);
+    localStorage.setItem('styleMode', mode.theme);
+  } catch (e) {}
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || styleModes[0].theme;
+  const currentIndex = styleModes.findIndex(item => item.theme === current);
+  const next = styleModes[(currentIndex + 1) % styleModes.length];
+  applyStyleMode(next.theme);
 }
 
 // Restore saved theme
 try {
-  const saved = localStorage.getItem('theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
+  const saved = localStorage.getItem('styleMode') || localStorage.getItem('theme');
+  applyStyleMode(saved || document.documentElement.getAttribute('data-theme'));
 } catch (e) {}
 
 document.getElementById('themeToggle').addEventListener('click', toggleTheme);
@@ -93,20 +157,20 @@ let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
 document.addEventListener('mousemove', e => {
   mouseX = e.clientX;
   mouseY = e.clientY;
-  cursorDot.style.left = (mouseX - 4) + 'px';
-  cursorDot.style.top = (mouseY - 4) + 'px';
+  cursorDot.style.left = mouseX + 'px';
+  cursorDot.style.top = mouseY + 'px';
 });
 
 function animateRing() {
   ringX += (mouseX - ringX) * 0.12;
   ringY += (mouseY - ringY) * 0.12;
-  cursorRing.style.left = (ringX - 20) + 'px';
-  cursorRing.style.top = (ringY - 20) + 'px';
+  cursorRing.style.left = ringX + 'px';
+  cursorRing.style.top = ringY + 'px';
   requestAnimationFrame(animateRing);
 }
 animateRing();
 
-const interactiveSelector = 'a, button, .project-card, .showcase-item, .skill-tag, .contact-link-item';
+const interactiveSelector = 'a, button, .project-card, .project-link, .showcase-item, .skill-tag, .experience-item, .contact-link-item';
 
 document.addEventListener('mouseover', e => {
   if (e.target.closest(interactiveSelector)) {
@@ -145,21 +209,115 @@ function initScrollReveal() {
 initScrollReveal();
 
 // ============================================
-// RENDER PROJECT CARDS
+// RENDER EDITABLE CONTENT
 // ============================================
+function escapeHTML(value) {
+  const span = document.createElement('span');
+  span.textContent = value ?? '';
+  return span.innerHTML;
+}
+
+function escapeAttribute(value) {
+  return escapeHTML(value).replace(/"/g, '&quot;');
+}
+
+function getYouTubeId(url) {
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.replace('www.', '');
+
+    if (host === 'youtu.be') {
+      return parsed.pathname.split('/').filter(Boolean)[0] || '';
+    }
+
+    if (host.endsWith('youtube.com')) {
+      const videoParam = parsed.searchParams.get('v');
+      if (videoParam) return videoParam;
+
+      const parts = parsed.pathname.split('/').filter(Boolean);
+      const videoPathIndex = parts.findIndex(part => ['embed', 'shorts', 'live'].includes(part));
+      if (videoPathIndex >= 0) return parts[videoPathIndex + 1] || '';
+    }
+  } catch (e) {
+    const match = String(url).match(/(?:v=|youtu\.be\/|embed\/|shorts\/|live\/)([A-Za-z0-9_-]{6,})/);
+    return match ? match[1] : '';
+  }
+
+  return '';
+}
+
+function getVideoThumbnail(video) {
+  if (video.thumbnail) return video.thumbnail;
+
+  const youtubeId = getYouTubeId(video.url);
+  return youtubeId ? `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg` : '';
+}
+
+function renderProjectLink(link) {
+  if (!link.url) {
+    return `<span class="project-link is-disabled">${escapeHTML(link.name)}</span>`;
+  }
+
+  return `
+    <a href="${escapeAttribute(link.url)}" target="_blank" rel="noopener noreferrer" class="project-link">
+      ${escapeHTML(link.name)}
+      ${icons.arrow}
+    </a>
+  `;
+}
+
 function renderProjectCard(project, idx) {
   const delayClass = idx > 0 ? ` reveal-delay-${idx}` : '';
+  const links = project.links || [];
 
   return `
     <div class="project-card no-hover reveal${delayClass}">
       <div class="project-card-header">
         <div class="project-icon">${icons.book}</div>
-        <h3>${project.title}</h3>
+        <h3>${escapeHTML(project.title)}</h3>
       </div>
-      <p>${project.description}</p>
-      <div class="project-tags">${project.tags.map(t => `<span class="project-tag">${t}</span>`).join('')}</div>
-      <div class="client-list">
-        ${project.clientList.map(c => `<a href="${c.url}" target="_blank" class="client-link">${c.name} ${icons.arrow}</a>`).join('')}
+      <p>${escapeHTML(project.description)}</p>
+      <div class="project-tags">${project.tags.map(t => `<span class="project-tag">${escapeHTML(t)}</span>`).join('')}</div>
+      <div class="project-links">
+        ${links.map(renderProjectLink).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function renderVideoCard(video, idx) {
+  const delayClass = ` reveal-delay-${Math.min(idx + 1, 4)}`;
+  const thumbnail = getVideoThumbnail(video);
+  const thumbnailMarkup = thumbnail
+    ? `<img class="showcase-thumb" src="${escapeAttribute(thumbnail)}" alt="${escapeAttribute(video.title)} thumbnail" loading="lazy">`
+    : '<div class="showcase-thumb showcase-thumb-fallback"></div>';
+
+  return `
+    <a href="${escapeAttribute(video.url)}" target="_blank" rel="noopener noreferrer" class="showcase-link reveal${delayClass}">
+      <div class="showcase-item">
+        ${thumbnailMarkup}
+        <div class="showcase-shine"></div>
+        <div class="showcase-overlay">
+          <div class="showcase-play">
+            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+          <div class="showcase-meta">
+            <span>${escapeHTML(video.label)}</span>
+            <h4>${escapeHTML(video.title)}</h4>
+            <strong>Watch video</strong>
+          </div>
+        </div>
+      </div>
+    </a>
+  `;
+}
+
+function renderExperienceItem(item) {
+  return `
+    <div class="experience-item">
+      <div>
+        <h4>${escapeHTML(item.title)}</h4>
+        <p>${escapeHTML(item.detail)}</p>
       </div>
     </div>
   `;
@@ -167,14 +325,30 @@ function renderProjectCard(project, idx) {
 
 function renderHomeProjects() {
   const grid = document.getElementById('homeProjectsGrid');
+  if (!grid) return;
   grid.innerHTML = projects.map(renderProjectCard).join('');
   setTimeout(initScrollReveal, 50);
 }
 
 function renderProjects() {
   const grid = document.getElementById('projectsGrid');
+  if (!grid) return;
   grid.innerHTML = projects.map(renderProjectCard).join('');
   setTimeout(initScrollReveal, 50);
+}
+
+function renderVideoShowcases() {
+  const markup = videos.map(renderVideoCard).join('');
+  document.querySelectorAll('[data-video-showcase]').forEach(grid => {
+    grid.innerHTML = markup;
+  });
+  setTimeout(initScrollReveal, 50);
+}
+
+function renderExperience() {
+  const list = document.getElementById('experienceList');
+  if (!list) return;
+  list.innerHTML = experienceItems.map(renderExperienceItem).join('');
 }
 
 // ============================================
@@ -182,6 +356,8 @@ function renderProjects() {
 // ============================================
 renderHomeProjects();
 renderProjects();
+renderVideoShowcases();
+renderExperience();
 
 // ============================================
 // TOAST NOTIFICATION
