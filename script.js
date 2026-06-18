@@ -298,7 +298,7 @@ function renderProjectCard(project, idx) {
         notableProjects.length
           ? `
             <div class="project-links-block">
-              <h4>Notable Projects</h4>
+              <h4>Recent/Notable Projects</h4>
               <div class="project-links">
                 ${notableProjects.map(renderProjectLink).join('')}
               </div>
