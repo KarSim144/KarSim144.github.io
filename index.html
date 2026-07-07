@@ -3,294 +3,112 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Berkay — Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="modal.css">
+
+  <title>Berkay Ulak | Berkay144 Portfolio</title>
+  <meta name="description" content="Official portfolio of Berkay Ulak, also known as Berkay144. Student developer focused on web development, cybersecurity projects, software tools, and computer-related projects.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://berkay144.com/">
+
+  <meta property="og:title" content="Berkay Ulak | Berkay144 Portfolio">
+  <meta property="og:description" content="Official portfolio of Berkay Ulak, also known as Berkay144. Developer portfolio, cybersecurity projects, web development, and software work.">
+  <meta property="og:url" content="https://berkay144.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Berkay144">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Berkay Ulak | Berkay144 Portfolio">
+  <meta name="twitter:description" content="Official portfolio of Berkay Ulak, also known as Berkay144.">
+
+  <!-- Instant HTML redirect fallback. Crawlers can still read the metadata above. -->
+  <meta http-equiv="refresh" content="0; url=https://berkay144.com/">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Berkay Ulak",
+      "alternateName": ["Berkay144", "Berkay"],
+      "url": "https://berkay144.com/",
+      "sameAs": [
+        "https://github.com/KarSim144",
+        "https://www.linkedin.com/in/berkay-a-63a4a53b1"
+      ],
+      "jobTitle": "Student Developer",
+      "knowsAbout": [
+        "Web Development",
+        "Cybersecurity",
+        "Software Development",
+        "JavaScript",
+        "Python",
+        "Java",
+        "C#",
+        "PHP"
+      ]
+    }
+  }
+  </script>
+
+  <script>
+    // Fast JavaScript redirect. The meta refresh above still works if JavaScript is disabled.
+    window.location.replace('https://berkay144.com/');
+  </script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0B0C10;
+      --text: #F4F7FA;
+      --muted: #A8B2BE;
+      --accent: #78D8C9;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    main {
+      max-width: 560px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    p {
+      margin: 0 0 24px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover { text-decoration: underline; }
+  </style>
 </head>
 <body>
-
-  <!-- Custom Cursor -->
-  <div class="cursor-dot" id="cursorDot"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
-
-  <!-- ========== NAVIGATION ========== -->
-  <nav class="nav" id="nav">
-    <a href="#" class="nav-logo" data-page="home">Welcome!<span>.</span></a>
-    <ul class="nav-links">
-      <li><a href="#" data-page="home" class="active">Home</a></li>
-      <li><a href="#" data-page="projects">Projects</a></li>
-      <li><a href="#" data-page="about">About</a></li>
-      <li><a href="#" data-page="contact">Contact</a></li>
-      <li class="nav-control-item">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" aria-describedby="styleHintDesktop"></button>
-        <span class="nav-tooltip" id="styleHintDesktop" role="tooltip">Style</span>
-      </li>
-    </ul>
-    <div class="nav-mobile-controls">
-      <div class="nav-control-wrap">
-        <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle theme" aria-describedby="styleHintMobile"></button>
-        <span class="nav-tooltip" id="styleHintMobile" role="tooltip">Style</span>
-      </div>
-      <div class="nav-control-wrap">
-        <button class="nav-hamburger" id="hamburger" aria-label="Menu" aria-describedby="menuHintMobile">
-          <span></span><span></span><span></span>
-        </button>
-        <span class="nav-tooltip nav-tooltip-menu" id="menuHintMobile" role="tooltip">Menu</span>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#" data-page="home">Home</a>
-    <a href="#" data-page="projects">Projects</a>
-    <a href="#" data-page="about">About</a>
-    <a href="#" data-page="contact">Contact</a>
-  </div>
-
-  <!-- ========== HOME PAGE ========== -->
-  <div class="page active" id="page-home">
-    <section class="hero">
-      <div class="hero-bg-shape"></div>
-      <div class="hero-bg-shape"></div>
-      <span class="hero-label">Developer &bull; Currently Studying</span>
-      <h1 class="hero-title">
-        <span class="line"><span class="line-inner">I love everything</span></span>
-        <span class="line"><span class="line-inner">about <em>computers</em>,</span></span>
-        <span class="line"><span class="line-inner">and some more.</span></span>
-      </h1>
-      <p class="hero-description">
-        Small time developer with a passion for everything computer related. Including building websites, making games, writing exploits, building computer hardware
-        and keep up with it all by trying to learn more.
-      </p>
-      <div class="hero-cta-row">
-        <a href="#" class="btn-primary magnetic" data-page="projects">
-          View Projects
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <a href="#" class="btn-outline magnetic" data-page="contact">Get in Touch</a>
-      </div>
-      <div class="hero-scroll-indicator">
-        <div class="scroll-line"></div>
-        Scroll Down!
-      </div>
-    </section>
-
-    <!-- Marquee Ticker -->
-    <div class="marquee-strip" aria-label="Skills">
-      <div class="marquee-track">
-        <div class="marquee-group">
-          <span class="marquee-item">Java</span>
-          <span class="marquee-item">Javascript</span>
-          <span class="marquee-item">C#</span>
-          <span class="marquee-item">Python</span>
-          <span class="marquee-item">PHP</span>
-          <span class="marquee-item">Cloud Infrastructure</span>
-          <span class="marquee-item">Web Building</span>
-          <span class="marquee-item">:)</span>
-        </div>
-        <div class="marquee-group" aria-hidden="true">
-          <span class="marquee-item">Java</span>
-          <span class="marquee-item">Javascript</span>
-          <span class="marquee-item">C#</span>
-          <span class="marquee-item">Python</span>
-          <span class="marquee-item">PHP</span>
-          <span class="marquee-item">Cloud Infrastructure</span>
-          <span class="marquee-item">Web Building</span>
-          <span class="marquee-item">:)</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Featured Projects -->
-    <section class="section" id="featured">
-      <div style="max-width:1400px;margin:0 auto;">
-        <div class="section-header reveal">
-          <h2 class="section-title">Some Projects <em>>></em></h2>
-        </div>
-        <div class="projects-grid" id="homeProjectsGrid"></div>
-      </div>
-    </section>
-
-    <!-- Video Showcase -->
-    <section class="section" style="background:var(--bg-secondary);transition:background var(--transition);">
-      <div style="max-width:1400px;margin:0 auto;">
-        <div class="section-header reveal">
-          <span class="section-label">Video Showcase</span>
-          <h2 class="section-title"><em>Click</em> to see demo.</h2>
-        </div>
-        <p class="showcase-description reveal reveal-delay-1">
-          I like cybersecurity projects so here are some videos showcasing my work since i cant share them online. Simple but cool.
-        </p>
-        <div class="showcase-grid" data-video-showcase></div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ========== PROJECTS PAGE ========== -->
-  <div class="page" id="page-projects">
-    <section class="section" style="padding-top:140px;">
-      <div style="max-width:1400px;margin:0 auto;">
-        <div class="section-header reveal">
-          <span class="section-label">Here are the</span>
-          <h2 class="section-title"><em>Projects</em></h2>
-        </div>
-        <div class="projects-grid" id="projectsGrid"></div>
-      </div>
-    </section>
-
-<!-- Video Showcase -->
-<section class="section" style="background:var(--bg-secondary);transition:background var(--transition);">
-  <div style="max-width:1400px;margin:0 auto;">
-    <div class="section-header reveal">
-      <span class="section-label">Video Showcase</span>
-      <h2 class="section-title"><em>Click</em> to see demos.</h2>
-    </div>
-    <p class="showcase-description reveal reveal-delay-1">
-      I like cybersecurity projects, so here are some videos showcasing my work. Simple really, but cool nonetheless.
-    </p>
-<div class="showcase-grid" data-video-showcase></div>
-    
-  </div>
-</section>
-  </div>
-
-  <!-- ========== ABOUT PAGE ========== -->
-  <div class="page" id="page-about">
-    <section class="section" style="padding-top:140px;" id="about">
-      <div class="section-header reveal about-header">
-        <span class="section-label">About Me</span>
-        <h2 class="section-title">Building software,<br><em>understanding</em> how it breaks.</h2>
-      </div>
-      <div class="about-grid">
-        <div class="about-text reveal reveal-delay-1">
-          <p>I'm a student developer focused on building practical websites, tools, and demos that are useful, readable, and easy to improve.</p>
-          <p>My work mixes web development with a strong interest in cybersecurity. I like learning how systems are built, where they can fail, and how to make the next version cleaner.</p>
-          <p>Right now I am growing through live projects, security demos, and an internship where I am making websites and getting more real-world practice.</p>
-          <p>I have lots of plans to carry on which ill slowly start on with. The first one would be a red team framework thats fuller than what ive done before.</p>
-          <p>I also have plans on making games in near future something I've always been interested in.</p>
-          <p>However currently im planning on finishing my existing projects and my university studies.</p>
-          <p>Small fact: I like the number 144 because its the square of 12. Looks neat aswell.</p>
-          <div class="about-stats">
-            <div class="stat-item reveal reveal-delay-2"><div class="stat-number">5</div><div class="stat-label">Live Projects</div></div>
-            <div class="stat-item reveal reveal-delay-3"><div class="stat-number">2+</div><div class="stat-label">Years Building</div></div>
-          </div>
-        </div>
-        <div class="about-side reveal reveal-delay-2">
-          <div class="about-skills">
-            <h3>Skillset</h3>
-            <div class="skill-category">
-              <div class="skill-category-label">Languages</div>
-              <div class="skill-tags">
-                <span class="skill-tag">Java</span>
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">C#</span>
-              </div>
-            </div>
-            <div class="skill-category">
-              <div class="skill-category-label">Web Development</div>
-              <div class="skill-tags">
-                <span class="skill-tag">HTML</span>
-                <span class="skill-tag">CSS</span>
-                <span class="skill-tag">PHP</span>
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">Java</span>
-              </div>
-            </div>
-            <div class="skill-category">
-              <div class="skill-category-label">Database/Frameworks</div>
-              <div class="skill-tags">
-                <span class="skill-tag">PostgreSQL</span>
-                <span class="skill-tag">MySQL</span>
-                <span class="skill-tag">Spring Boot</span>
-                <span class="skill-tag">.NET</span>
-              </div>
-            </div>
-          </div>
-          <div class="experience-panel">
-            <h3>Experience</h3>
-            <div class="experience-list" id="experienceList"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ========== CONTACT PAGE ========== -->
-  <div class="page" id="page-contact">
-    <section class="section" style="padding-top:140px;" id="contact">
-      <div class="section-header reveal">
-        <span class="section-label">Get in Touch</span>
-        <h2 class="section-title">Let's build something<br><em>together</em>.</h2>
-      </div>
-      <div class="contact-grid">
-        <div>
-          <p class="contact-text reveal reveal-delay-1">Whether you need a developer for your next project or just want to talk — I'm always open to conversations and collaborations.</p>
-          <div class="contact-links">
-            <a href="mailto:berkay.codes144@gmail.com" class="contact-link-item reveal reveal-delay-2">
-              <div class="contact-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
-              <div><div class="contact-link-label">Email</div><div class="contact-link-value">berkay.codes144@gmail.com</div></div>
-            </a>
-            <a href="https://github.com/KarSim144" class="contact-link-item reveal reveal-delay-2">
-              <div class="contact-link-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></div>
-              <div><div class="contact-link-label">GitHub</div><div class="contact-link-value">KarSim144</div></div>
-            </a>
-            <a href="https://www.linkedin.com/in/berkay-a-63a4a53b1" class="contact-link-item reveal reveal-delay-3">
-              <div class="contact-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
-              <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">Berkay</div></div>
-            </a>
-          </div>
-        </div>
-        <form class="contact-form reveal reveal-delay-2" action="https://api.web3forms.com/submit" method="POST" id="contactForm">
-          <input type="hidden" name="access_key" value="25dfc134-4aee-4194-9bcb-9ffec2e4b981">
-          <input type="hidden" name="subject" value="New Portfolio Contact">
-          <input type="hidden" name="from_name" value="Portfolio Contact Form">
-          <input type="checkbox" name="botcheck" style="display:none;">
-          <div class="form-row">
-            <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your name" required></div>
-            <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="hello@example.com" required></div>
-          </div>
-          <div class="form-group"><label>Other Contact (optional)</label><input type="text" name="other_contact" placeholder="Phone, Discord, LinkedIn, etc."></div>
-          <div class="form-group"><label>Subject</label><input type="text" name="subject" placeholder="Project inquiry, collab, etc."></div>
-          <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell me about your project or idea..." required></textarea></div>
-          <button type="submit" class="btn-primary magnetic" style="align-self:flex-start;">
-            Send Message
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
-        </form>
-      </div>
-    </section>
-  </div>
-
-  <!-- ========== FOOTER ========== -->
-  <footer class="footer">
-    <p class="footer-text">&copy; 2026 Berkay<span>.</span> — Crafted with love for the game.</p>
-    <div class="footer-social">
-      <a href="https://github.com/KarSim144" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
-      <a href="https://www.linkedin.com/in/berkay-a-63a4a53b1" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-    </div>
-  </footer>
-
-  <!-- Toast Notification -->
-  <div class="toast" id="toast"></div>
-
-  <!-- JavaScript -->
-  <script src="script.js"></script>
-  <script src="modal.js"></script>
+  <main>
+    <h1>Redirecting...</h1>
+    <p>You are being redirected to the official Berkay144 portfolio.</p>
+    <p><a href="https://berkay144.com/">Click here if you are not redirected automatically.</a></p>
+  </main>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
